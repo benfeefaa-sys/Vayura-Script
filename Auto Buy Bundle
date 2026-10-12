@@ -1,0 +1,367 @@
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UIS = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local remote = ReplicatedStorage:WaitForChild("ByteNetReliable")
+
+local payload = buffer.fromstring("\000\228\015\000Material Bundle")
+
+local MIN_DELAY = 0.05
+local MAX_DELAY = 1.00
+local delayTime = 0.05
+
+local enabled = false
+local attempts = 0
+
+local previous = playerGui:FindFirstChild("MaterialAutoBuy")
+if previous then
+    previous:Destroy()
+end
+
+local function create(class, properties, parent)
+    local object = Instance.new(class)
+
+    for key, value in pairs(properties) do
+        object[key] = value
+    end
+
+    object.Parent = parent
+    return object
+end
+
+local C = {
+    background = Color3.fromRGB(17, 19, 23),
+    header = Color3.fromRGB(23, 26, 31),
+    surface = Color3.fromRGB(31, 35, 42),
+    border = Color3.fromRGB(59, 65, 76),
+    white = Color3.fromRGB(240, 242, 246),
+    muted = Color3.fromRGB(143, 150, 162),
+    accent = Color3.fromRGB(100, 158, 234),
+    green = Color3.fromRGB(112, 207, 155)
+}
+
+local gui = create("ScreenGui", {
+    Name = "MaterialAutoBuy",
+    ResetOnSpawn = false,
+    IgnoreGuiInset = true,
+    DisplayOrder = 100
+}, playerGui)
+
+local main = create("Frame", {
+    Name = "Main",
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Position = UDim2.fromScale(0.5, 0.5),
+    Size = UDim2.fromOffset(330, 220),
+    BackgroundColor3 = C.background,
+    BorderSizePixel = 0
+}, gui)
+
+create("UIStroke", {
+    Color = C.border,
+    Thickness = 1
+}, main)
+
+local header = create("Frame", {
+    Name = "Header",
+    Size = UDim2.new(1, 0, 0, 48),
+    BackgroundColor3 = C.header,
+    BorderSizePixel = 0,
+    Active = true
+}, main)
+
+create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.fromOffset(15, 8),
+    Size = UDim2.fromOffset(240, 19),
+    Text = "MATERIAL  /  AUTOBUY",
+    TextColor3 = C.white,
+    TextSize = 14,
+    Font = Enum.Font.GothamBold,
+    TextXAlignment = Enum.TextXAlignment.Left
+}, header)
+
+create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.fromOffset(15, 28),
+    Size = UDim2.fromOffset(240, 12),
+    Text = "Orba Is a Nigga",
+    TextColor3 = C.muted,
+    TextSize = 9,
+    Font = Enum.Font.Gotham,
+    TextXAlignment = Enum.TextXAlignment.Left
+}, header)
+
+local close = create("TextButton", {
+    Position = UDim2.new(1, -39, 0, 8),
+    Size = UDim2.fromOffset(29, 29),
+    BackgroundColor3 = C.surface,
+    BorderSizePixel = 0,
+    Text = "X",
+    TextColor3 = C.muted,
+    TextSize = 12,
+    Font = Enum.Font.GothamBold,
+    AutoButtonColor = false
+}, header)
+
+local toggle = create("TextButton", {
+    Position = UDim2.fromOffset(15, 62),
+    Size = UDim2.new(1, -30, 0, 46),
+    BackgroundColor3 = C.surface,
+    BorderSizePixel = 0,
+    Text = "",
+    AutoButtonColor = false
+}, main)
+
+local indicator = create("Frame", {
+    Position = UDim2.fromOffset(0, 0),
+    Size = UDim2.new(0, 3, 1, 0),
+    BackgroundColor3 = C.muted,
+    BorderSizePixel = 0
+}, toggle)
+
+local toggleText = create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.fromOffset(14, 0),
+    Size = UDim2.new(1, -105, 1, 0),
+    Text = "START AUTOBUY",
+    TextColor3 = C.white,
+    Font = Enum.Font.GothamBold,
+    TextSize = 12,
+    TextXAlignment = Enum.TextXAlignment.Left
+}, toggle)
+
+local status = create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.new(1, -85, 0, 0),
+    Size = UDim2.fromOffset(72, 46),
+    Text = "OFFLINE",
+    TextColor3 = C.muted,
+    Font = Enum.Font.GothamMedium,
+    TextSize = 10,
+    TextXAlignment = Enum.TextXAlignment.Right
+}, toggle)
+
+create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.fromOffset(15, 121),
+    Size = UDim2.fromOffset(100, 17),
+    Text = "BUY SPEED",
+    TextColor3 = C.white,
+    Font = Enum.Font.GothamBold,
+    TextSize = 10,
+    TextXAlignment = Enum.TextXAlignment.Left
+}, main)
+
+local speedText = create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.new(1, -190, 0, 121),
+    Size = UDim2.fromOffset(175, 17),
+    Text = "",
+    TextColor3 = C.accent,
+    Font = Enum.Font.GothamMedium,
+    TextSize = 10,
+    TextXAlignment = Enum.TextXAlignment.Right
+}, main)
+
+local slider = create("Frame", {
+    Position = UDim2.fromOffset(15, 152),
+    Size = UDim2.new(1, -30, 0, 6),
+    BackgroundColor3 = C.surface,
+    BorderSizePixel = 0,
+    Active = true
+}, main)
+
+local fill = create("Frame", {
+    Size = UDim2.fromScale(0, 1),
+    BackgroundColor3 = C.accent,
+    BorderSizePixel = 0
+}, slider)
+
+local knob = create("Frame", {
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Position = UDim2.fromScale(0, 0.5),
+    Size = UDim2.fromOffset(10, 18),
+    BackgroundColor3 = C.white,
+    BorderSizePixel = 0,
+    Active = true
+}, slider)
+
+local attemptsText = create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.fromOffset(15, 185),
+    Size = UDim2.fromOffset(200, 17),
+    Text = "REQUESTS SENT   0",
+    TextColor3 = C.muted,
+    Font = Enum.Font.GothamMedium,
+    TextSize = 10,
+    TextXAlignment = Enum.TextXAlignment.Left
+}, main)
+
+create("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.new(1, -105, 0, 185),
+    Size = UDim2.fromOffset(90, 17),
+    Text = "Created By VAYURA",
+    TextColor3 = C.muted,
+    Font = Enum.Font.Gotham,
+    TextSize = 9,
+    TextXAlignment = Enum.TextXAlignment.Right
+}, main)
+
+-- SPEED CONTROL
+
+local function updateSpeed()
+    local alpha =
+        (MAX_DELAY - delayTime) /
+        (MAX_DELAY - MIN_DELAY)
+
+    fill.Size = UDim2.fromScale(alpha, 1)
+    knob.Position = UDim2.fromScale(alpha, 0.5)
+
+    speedText.Text = string.format(
+        "%.2fs  /  %.1f per sec",
+        delayTime,
+        1 / delayTime
+    )
+end
+
+local function setSpeedFromX(x)
+    local alpha = math.clamp(
+        (x - slider.AbsolutePosition.X) /
+        slider.AbsoluteSize.X,
+        0,
+        1
+    )
+
+    delayTime = MAX_DELAY -
+        alpha * (MAX_DELAY - MIN_DELAY)
+
+    delayTime = math.floor(delayTime * 100 + 0.5) / 100
+
+    updateSpeed()
+end
+
+local sliding = false
+
+local function beginSlide(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+
+        sliding = true
+        setSpeedFromX(input.Position.X)
+    end
+end
+
+slider.InputBegan:Connect(beginSlide)
+knob.InputBegan:Connect(beginSlide)
+
+UIS.InputChanged:Connect(function(input)
+    if not sliding then
+        return
+    end
+
+    if input.UserInputType == Enum.UserInputType.MouseMovement
+        or input.UserInputType == Enum.UserInputType.Touch then
+
+        setSpeedFromX(input.Position.X)
+    end
+end)
+
+UIS.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+
+        sliding = false
+    end
+end)
+
+
+local function refreshToggle()
+    if enabled then
+        toggle.BackgroundColor3 = Color3.fromRGB(28, 43, 41)
+        indicator.BackgroundColor3 = C.green
+        toggleText.Text = "STOP AUTOBUY"
+        status.Text = "RUNNING"
+        status.TextColor3 = C.green
+    else
+        toggle.BackgroundColor3 = C.surface
+        indicator.BackgroundColor3 = C.muted
+        toggleText.Text = "START AUTOBUY"
+        status.Text = "OFFLINE"
+        status.TextColor3 = C.muted
+    end
+end
+
+toggle.MouseButton1Click:Connect(function()
+    enabled = not enabled
+    refreshToggle()
+end)
+
+close.MouseButton1Click:Connect(function()
+    enabled = false
+    gui:Destroy()
+end)
+
+local dragging = false
+local dragStart
+local startPosition
+
+header.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+
+        dragging = true
+        dragStart = input.Position
+        startPosition = main.Position
+    end
+end)
+
+UIS.InputChanged:Connect(function(input)
+    if not dragging or not dragStart then
+        return
+    end
+
+    if input.UserInputType == Enum.UserInputType.MouseMovement
+        or input.UserInputType == Enum.UserInputType.Touch then
+
+        local delta = input.Position - dragStart
+
+        main.Position = UDim2.new(
+            startPosition.X.Scale,
+            startPosition.X.Offset + delta.X,
+            startPosition.Y.Scale,
+            startPosition.Y.Offset + delta.Y
+        )
+    end
+end)
+
+UIS.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+
+        dragging = false
+    end
+end)
+
+task.spawn(function()
+    while gui.Parent do
+        if enabled then
+            remote:FireServer(payload)
+
+            attempts += 1
+            attemptsText.Text =
+                "REQUESTS SENT   " .. tostring(attempts)
+
+            task.wait(delayTime)
+        else
+            task.wait(0.08)
+        end
+    end
+end)
+
+updateSpeed()
+refreshToggle()
