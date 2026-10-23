@@ -1,127 +1,549 @@
--- VAYURA | Gold Bundle
-do
-local _nFgRChYuwky={
-    "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",
+
+--[[
+    VAYURA | GOLD BUNDLE
+    Created by VAYURA
+    PC / MOBILE
+]]
+
+-- CONFIGURATION
+local Config = {
+    MinSpeed = 0.001,
+    MaxSpeed = 0.01,
+    DefaultSpeed = 0.001,
+
+    -- Server-friendly request limit
+    MaxRequestsPerSecond = 20,
+
+    ToggleKey = Enum.KeyCode.RightControl,
+    ProductName = "Gold Bundle",
+
+    Accent = Color3.fromRGB(79, 190, 210)
 }
-local _RmsFsSuGCCq={71,34,83,82,69,52,37,13,54,50,7,4,12,57,19,86,17,59,15,62,78,31,28,79,20,77,2,76,22,16,81,75,65,35,85,43,25,51,74,66,18,60,88,10,26,9,45,47,1,29,49,67,33,41,87,11,53,39,68,14,38,30,6,36,55,27,40,46,80,58,5,72,56,48,63,3,44,8,61,32,84,73,24,64,70,23,42,21}
-local _ooXZhChoZLA="yXWRqDn2lxJ3eoHF/10j64k9BtONZEThmbaLMzVYfwSIAcPKUi8p7dvsguGC+rQ5"
-local _pUkQUwMFAVF={10,9,114,108,212,113,33,13,220,245,238,141,52,141,134,177,220,207,250,179,212,188,64,115,174,84,131,1,167,218,200,29,193,126,111,27,159,194,170,230,229}
-local _hNJusMmZFTW={}
-for i=1,64 do _hNJusMmZFTW[string.sub(_ooXZhChoZLA,i,i)]=i-1 end
-local _IFbcgMpzYkf={}
-for i=1,#_RmsFsSuGCCq do _IFbcgMpzYkf[i]=_nFgRChYuwky[_RmsFsSuGCCq[i]] end
-local _neujvLaZjNK=table.concat(_IFbcgMpzYkf)
-local _UvDxYThdPaE={}
-local _fteoNhRqTEG=0
-local _CIrSXwlTzMm=0
-local _DSXDQIDWley=0
-for i=1,#_neujvLaZjNK do
-    local v=_hNJusMmZFTW[string.sub(_neujvLaZjNK,i,i)]
-    if v~=nil then
-        _fteoNhRqTEG=_fteoNhRqTEG*64+v
-        _CIrSXwlTzMm=_CIrSXwlTzMm+6
-        if _CIrSXwlTzMm>=8 then
-            _CIrSXwlTzMm=_CIrSXwlTzMm-8
-            _DSXDQIDWley=_DSXDQIDWley+1
-            local n=math.floor(_fteoNhRqTEG/(2^_CIrSXwlTzMm))%256
-            _UvDxYThdPaE[_DSXDQIDWley]=string.char(bit32.bxor(n,(_DSXDQIDWley*73+_pUkQUwMFAVF[((_DSXDQIDWley-1)%#_pUkQUwMFAVF)+1]*17+math.floor(_DSXDQIDWley/97))%256))
-            _fteoNhRqTEG=_fteoNhRqTEG%(2^_CIrSXwlTzMm)
-        end
+
+-- SERVICES
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local UIS = game:GetService("UserInputService")
+
+local Player = Players.LocalPlayer
+local PlayerGui = Player:WaitForChild("PlayerGui")
+local Remote = ReplicatedStorage:WaitForChild("ByteNetReliable", 10)
+
+if not Remote or not Remote:IsA("RemoteEvent") then
+    warn("[VAYURA] ByteNetReliable unavailable.")
+    return
+end
+
+if not buffer or not buffer.fromstring then
+    warn("[VAYURA] Buffer API unavailable.")
+    return
+end
+
+local OldUI = PlayerGui:FindFirstChild("VAYURA_Gold")
+if OldUI then
+    OldUI:Destroy()
+end
+
+-- STATE
+local Enabled = false
+local Speed = math.clamp(
+    Config.DefaultSpeed,
+    Config.MinSpeed,
+    Config.MaxSpeed
+)
+
+local Requests = 0
+local Rate = 0
+local RunID = 0
+local Connections = {}
+
+local Payload = buffer.fromstring("\000\229\vGold Bundle")
+
+-- THEME
+local Theme = {
+    BG = Color3.fromRGB(16, 18, 22),
+    Panel = Color3.fromRGB(25, 28, 34),
+    Border = Color3.fromRGB(47, 52, 61),
+    Text = Color3.fromRGB(235, 238, 242),
+    Muted = Color3.fromRGB(137, 146, 157),
+    Accent = Config.Accent,
+    Red = Color3.fromRGB(205, 80, 87)
+}
+
+local function Create(class, props, parent)
+    local obj = Instance.new(class)
+
+    for key, value in pairs(props) do
+        obj[key] = value
+    end
+
+    obj.Parent = parent
+    return obj
+end
+
+local function Round(obj, radius)
+    Create("UICorner", {
+        CornerRadius = UDim.new(0, radius)
+    }, obj)
+end
+
+local function Text(parent, text, pos, size, fontSize, color)
+    return Create("TextLabel", {
+        BackgroundTransparency = 1,
+        Position = pos,
+        Size = size,
+        Text = text,
+        Font = Enum.Font.GothamMedium,
+        TextSize = fontSize,
+        TextColor3 = color,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        BorderSizePixel = 0
+    }, parent)
+end
+
+local function Connect(signal, callback)
+    local connection = signal:Connect(callback)
+    table.insert(Connections, connection)
+    return connection
+end
+
+-- INTERFACE
+local Gui = Create("ScreenGui", {
+    Name = "VAYURA_Gold",
+    ResetOnSpawn = false,
+    IgnoreGuiInset = true,
+    DisplayOrder = 100
+}, PlayerGui)
+
+local Main = Create("Frame", {
+    Name = "Main",
+    Size = UDim2.fromOffset(356, 342),
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Position = UDim2.fromScale(0.5, 0.5),
+    BackgroundColor3 = Theme.BG,
+    BorderSizePixel = 0
+}, Gui)
+Round(Main, 6)
+
+Create("UIStroke", {
+    Color = Theme.Border,
+    Thickness = 1
+}, Main)
+
+Create("UISizeConstraint", {
+    MaxSize = Vector2.new(356, 342)
+}, Main)
+
+local Header = Create("Frame", {
+    Size = UDim2.new(1, 0, 0, 75),
+    BackgroundTransparency = 1,
+    Active = true
+}, Main)
+
+local Title = Text(
+    Header,
+    "VAYURA",
+    UDim2.fromOffset(17, 14),
+    UDim2.fromOffset(260, 27),
+    22,
+    Theme.Text
+)
+Title.Font = Enum.Font.GothamBold
+
+Text(
+    Header,
+    "Natan is a nigger",
+    UDim2.fromOffset(18, 46),
+    UDim2.fromOffset(290, 18),
+    10,
+    Theme.Muted
+)
+
+local Close = Create("TextButton", {
+    Position = UDim2.new(1, -39, 0, 16),
+    Size = UDim2.fromOffset(25, 25),
+    Text = "X",
+    Font = Enum.Font.GothamBold,
+    TextSize = 12,
+    TextColor3 = Theme.Muted,
+    BackgroundColor3 = Theme.Panel,
+    BorderSizePixel = 0
+}, Header)
+Round(Close, 4)
+
+Create("Frame", {
+    Position = UDim2.fromOffset(17, 76),
+    Size = UDim2.new(1, -34, 0, 1),
+    BackgroundColor3 = Theme.Border,
+    BorderSizePixel = 0
+}, Main)
+
+-- SPEED SECTION
+Text(
+    Main,
+    "REQUEST INTERVAL",
+    UDim2.fromOffset(18, 99),
+    UDim2.fromOffset(180, 20),
+    11,
+    Theme.Muted
+)
+
+local SpeedLabel = Text(
+    Main,
+    "0.030s",
+    UDim2.new(1, -112, 0, 99),
+    UDim2.fromOffset(94, 20),
+    13,
+    Theme.Accent
+)
+SpeedLabel.TextXAlignment = Enum.TextXAlignment.Right
+SpeedLabel.Font = Enum.Font.GothamBold
+
+local Track = Create("Frame", {
+    Position = UDim2.fromOffset(19, 143),
+    Size = UDim2.new(1, -38, 0, 6),
+    BackgroundColor3 = Theme.Border,
+    BorderSizePixel = 0,
+    Active = true
+}, Main)
+Round(Track, 3)
+
+local Fill = Create("Frame", {
+    Size = UDim2.fromScale(0.5, 1),
+    BackgroundColor3 = Theme.Accent,
+    BorderSizePixel = 0
+}, Track)
+Round(Fill, 3)
+
+local Knob = Create("Frame", {
+    AnchorPoint = Vector2.new(0.5, 0.5),
+    Position = UDim2.fromScale(0.5, 0.5),
+    Size = UDim2.fromOffset(14, 14),
+    BackgroundColor3 = Theme.Text,
+    BorderSizePixel = 0
+}, Track)
+Round(Knob, 4)
+
+Text(
+    Main,
+    "0.01s",
+    UDim2.fromOffset(19, 160),
+    UDim2.fromOffset(80, 17),
+    10,
+    Theme.Muted
+)
+
+local MaxText = Text(
+    Main,
+    "0.05s",
+    UDim2.new(1, -100, 0, 160),
+    UDim2.fromOffset(81, 17),
+    10,
+    Theme.Muted
+)
+MaxText.TextXAlignment = Enum.TextXAlignment.Right
+
+-- STATISTICS
+local Stats = Create("Frame", {
+    Position = UDim2.fromOffset(18, 191),
+    Size = UDim2.new(1, -36, 0, 79),
+    BackgroundColor3 = Theme.Panel,
+    BorderSizePixel = 0
+}, Main)
+Round(Stats, 5)
+
+Text(
+    Stats,
+    "STATUS",
+    UDim2.fromOffset(12, 10),
+    UDim2.fromOffset(130, 17),
+    10,
+    Theme.Muted
+)
+
+local Status = Text(
+    Stats,
+    "IDLE",
+    UDim2.new(1, -145, 0, 10),
+    UDim2.fromOffset(132, 17),
+    11,
+    Theme.Muted
+)
+Status.TextXAlignment = Enum.TextXAlignment.Right
+Status.Font = Enum.Font.GothamBold
+
+Text(
+    Stats,
+    "REQUESTS",
+    UDim2.fromOffset(12, 32),
+    UDim2.fromOffset(130, 17),
+    10,
+    Theme.Muted
+)
+
+local CountText = Text(
+    Stats,
+    "0",
+    UDim2.new(1, -145, 0, 32),
+    UDim2.fromOffset(132, 17),
+    11,
+    Theme.Text
+)
+CountText.TextXAlignment = Enum.TextXAlignment.Right
+
+Text(
+    Stats,
+    "RATE",
+    UDim2.fromOffset(12, 54),
+    UDim2.fromOffset(130, 17),
+    10,
+    Theme.Muted
+)
+
+local RateText = Text(
+    Stats,
+    "0 / SEC",
+    UDim2.new(1, -145, 0, 54),
+    UDim2.fromOffset(132, 17),
+    11,
+    Theme.Text
+)
+RateText.TextXAlignment = Enum.TextXAlignment.Right
+
+-- MAIN BUTTON
+local Toggle = Create("TextButton", {
+    Position = UDim2.fromOffset(18, 284),
+    Size = UDim2.new(1, -36, 0, 42),
+    BackgroundColor3 = Theme.Accent,
+    BorderSizePixel = 0,
+    Text = "START AUTO BUY",
+    TextColor3 = Theme.BG,
+    Font = Enum.Font.GothamBold,
+    TextSize = 12,
+    AutoButtonColor = true
+}, Main)
+Round(Toggle, 5)
+
+-- SPEED SLIDER
+local Sliding = false
+
+local function UpdateSlider()
+    local range = Config.MaxSpeed - Config.MinSpeed
+    local alpha = 0
+
+    if range > 0 then
+        alpha = (Speed - Config.MinSpeed) / range
+    end
+
+    alpha = math.clamp(alpha, 0, 1)
+
+    Fill.Size = UDim2.fromScale(alpha, 1)
+    Knob.Position = UDim2.fromScale(alpha, 0.5)
+    SpeedLabel.Text = string.format("%.3fs", Speed)
+end
+
+local function SetSpeedAt(x)
+    local width = math.max(Track.AbsoluteSize.X, 1)
+
+    local alpha = math.clamp(
+        (x - Track.AbsolutePosition.X) / width,
+        0,
+        1
+    )
+
+    local value = Config.MinSpeed +
+        alpha * (Config.MaxSpeed - Config.MinSpeed)
+
+    Speed = math.clamp(
+        math.floor(value * 1000 + 0.5) / 1000,
+        Config.MinSpeed,
+        Config.MaxSpeed
+    )
+
+    UpdateSlider()
+end
+
+Connect(Track.InputBegan, function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+        Sliding = true
+        SetSpeedAt(input.Position.X)
+    end
+end)
+
+-- DRAGGING
+local Dragging = false
+local DragStart
+local InitialPosition
+
+Connect(Header.InputBegan, function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+        Dragging = true
+        DragStart = input.Position
+        InitialPosition = Main.Position
+    end
+end)
+
+Connect(UIS.InputChanged, function(input)
+    if input.UserInputType ~= Enum.UserInputType.MouseMovement
+        and input.UserInputType ~= Enum.UserInputType.Touch then
+        return
+    end
+
+    if Sliding then
+        SetSpeedAt(input.Position.X)
+    end
+
+    if Dragging and DragStart and InitialPosition then
+        local delta = input.Position - DragStart
+
+        Main.Position = UDim2.new(
+            InitialPosition.X.Scale,
+            InitialPosition.X.Offset + delta.X,
+            InitialPosition.Y.Scale,
+            InitialPosition.Y.Offset + delta.Y
+        )
+    end
+end)
+
+Connect(UIS.InputEnded, function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+        or input.UserInputType == Enum.UserInputType.Touch then
+        Sliding = false
+        Dragging = false
+    end
+end)
+
+-- AUTO BUY ENGINE
+local function RefreshButton()
+    if Enabled then
+        Status.Text = "RUNNING"
+        Status.TextColor3 = Theme.Accent
+
+        Toggle.Text = "STOP AUTO BUY"
+        Toggle.BackgroundColor3 = Theme.Red
+        Toggle.TextColor3 = Theme.Text
+    else
+        Status.Text = "IDLE"
+        Status.TextColor3 = Theme.Muted
+
+        Toggle.Text = "START AUTO BUY"
+        Toggle.BackgroundColor3 = Theme.Accent
+        Toggle.TextColor3 = Theme.BG
     end
 end
-local _dDMhVTbsJDV=table.concat(_UvDxYThdPaE)
-if #_dDMhVTbsJDV~=12056 then error("[VAYURA] Invalid protected payload length",0) end
-local _vByXKxpdhUM=2166136261
-for i=1,#_dDMhVTbsJDV do _vByXKxpdhUM=(_vByXKxpdhUM*131+string.byte(_dDMhVTbsJDV,i))%4294967296 end
-if _vByXKxpdhUM~=3893884179 then error("[VAYURA] Protected payload integrity check failed",0) end
-local _PbDBfrtGJMR,_HsUNPKvNrPT=loadstring(_dDMhVTbsJDV)
-if not _PbDBfrtGJMR then error("[VAYURA] Luau compilation failed: "..tostring(_HsUNPKvNrPT),0) end
-return _PbDBfrtGJMR()
+
+local function SetEnabled(value)
+    if Enabled == value then
+        return
+    end
+
+    Enabled = value
+    RunID += 1
+
+    RefreshButton()
+
+    if not Enabled then
+        return
+    end
+
+    local CurrentRun = RunID
+
+    task.spawn(function()
+        while Enabled
+            and CurrentRun == RunID
+            and Gui.Parent do
+
+            -- Enforce an effective minimum interval.
+            local interval = math.max(
+                Speed,
+                1 / math.max(Config.MaxRequestsPerSecond, 1)
+            )
+
+            task.wait(interval)
+
+            if not Enabled
+                or CurrentRun ~= RunID
+                or not Gui.Parent then
+                break
+            end
+
+            if not Remote.Parent then
+                warn("[VAYURA] Remote disconnected.")
+                SetEnabled(false)
+                break
+            end
+
+            local success, err = pcall(function()
+                Remote:FireServer(Payload)
+            end)
+
+            if success then
+                Requests += 1
+            else
+                warn("[VAYURA] Request failed:", err)
+                SetEnabled(false)
+                break
+            end
+        end
+    end)
 end
+
+Connect(Toggle.MouseButton1Click, function()
+    SetEnabled(not Enabled)
+end)
+
+Connect(UIS.InputBegan, function(input, processed)
+    if processed or not Gui.Parent then
+        return
+    end
+
+    if input.KeyCode == Config.ToggleKey then
+        SetEnabled(not Enabled)
+    end
+end)
+
+Connect(Close.MouseButton1Click, function()
+    SetEnabled(false)
+    Gui:Destroy()
+end)
+
+Connect(Gui.Destroying, function()
+    Enabled = false
+    RunID += 1
+
+    for _, connection in ipairs(Connections) do
+        connection:Disconnect()
+    end
+
+    table.clear(Connections)
+end)
+
+-- LIVE STATISTICS
+task.spawn(function()
+    local PreviousCount = 0
+
+    while Gui.Parent do
+        task.wait(1)
+
+        if not Gui.Parent then
+            break
+        end
+
+        local Difference = Requests - PreviousCount
+        PreviousCount = Requests
+
+        Rate = Difference
+
+        CountText.Text = tostring(Requests)
+        RateText.Text = tostring(Rate) .. " / SEC"
+    end
+end)
+
+-- INITIALIZE
+UpdateSlider()
+RefreshButton()
+
+print("[VAYURA] Gold Bundle loaded.")
+print("[VAYURA] Created by VAYURA")
